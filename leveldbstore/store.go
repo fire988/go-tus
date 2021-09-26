@@ -1,7 +1,7 @@
 package leveldbstore
 
 import (
-	"github.com/eventials/go-tus"
+	"github.com/fire988/go-tus"
 	"github.com/syndtr/goleveldb/leveldb"
 )
 

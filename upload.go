@@ -57,16 +57,17 @@ func (u *Upload) EncodedMetadata() string {
 }
 
 // NewUploadFromFile creates a new Upload from an os.File.
-func NewUploadFromFile(f *os.File) (*Upload, error) {
+func NewUploadFromFile(customMetaData map[string]string, f *os.File) (*Upload, error) {
 	fi, err := f.Stat()
-
 	if err != nil {
 		return nil, err
 	}
 
-	metadata := map[string]string{
-		"filename": fi.Name(),
+	metadata := customMetaData
+	if metadata == nil {
+		metadata = map[string]string{}
 	}
+	metadata["filename"] = fi.Name()
 
 	fingerprint := fmt.Sprintf("%s-%d-%s", fi.Name(), fi.Size(), fi.ModTime())
 
